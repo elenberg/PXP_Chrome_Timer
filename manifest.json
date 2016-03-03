@@ -9,12 +9,8 @@
     "128": "icons/icon_072.png"
   },
   "default_locale": "en",
-  "background": {
-    "page": "src/bg/background.html",
-    "persistent": true
-  },
   "browser_action":{
     "default_popup" : "src/popup/popup.html"
   },
-  "permissions": ["http://djangoreddit.me", "cookies"]
+  "permissions": ["http://djangoreddit.me", "cookies", "storage"]
 } 
