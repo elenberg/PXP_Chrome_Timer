@@ -8,15 +8,44 @@
 	<div style="width:200px;">
 		<h2>PXP Timer</h2>
 		<div id="container">
-			<form>
-				
-				<input type="text" id="username" value="email">
-				<input type="password" id="password" value="password">
-				<a id="login">
-				<button value="login">Login</button>
-				</a>
-			</form>
+			<div id="loggedOut">
+				<form>
+					<input type="text" id="username" value="email">
+					<input type="password" id="password" value="password">
+					<a id="login">
+					<button value="login">Login</button>
+					</a>
+				</form>
+			</div>
 		</div>
+		<div id="startContainer" style="display:none;">
+			<div id="boards" >
+				<select id="board_list">
+					<option value="0">---</option>
+				</select>	
+				</div>
+			<div id="cards" style="display:none">
+				<select id="card_list">
+					<option value="0">---</option>
+				</select>
+			</div>
+				<div id="timer">
+				<button id="start" style="display:none;">start</button>
+				</div>
+				<a id="logout"><button>Logout</button></a>
+			</div>
+		</div>
+	
+		<div id="stopContainer" style="display:none;">
+			<div id="timer">
+				<div id="time">
+			
+				</div>
+				<button id="stop">stop and send</button>
+			</div>
+			<button id="logout">Logout</button>
+		</div>
+	
 	</div>
 	<script src="../../js/jquery-2.2.1.min.js"></script>
 	<script src="../../js/api.js"></script>
