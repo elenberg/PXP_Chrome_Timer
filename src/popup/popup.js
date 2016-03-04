@@ -33,6 +33,10 @@ $("#logout").on("click",function(){
 	localStorage.removeItem('card_key');
 	localStorage.removeItem('board_key');
 	localStorage.removeItem('list_apikey');
+	localStorage.removeItem('client_apikey');
+	$('#loggedOut').css("display", "")
+	$('#startContainer').css('display', 'none')		
+	$('#stopContainer').css('display', 'none')	
 })
 
 $('#login').on("click",function(e) {
@@ -51,11 +55,8 @@ $('#login').on("click",function(e) {
 				dataType: 'json',
 				data: JSON.stringify(params),
 				success: function(data) {
-					console.log("Success")
-					console.log(data);
 					localStorage.setItem('login', true)
 					localStorage.setItem('user', JSON.stringify(data))
-					console.log(localStorage)
 					loggedIn()
 				}
 			});
@@ -70,6 +71,7 @@ $('#start').on("click",function(){
 	localStorage.setItem('card',card_key)
 	localStorage.setItem('board', board_key)
 	api_get_list(apikey, card_key);
+	api_get_client(apikey, board_key);
 	$('#startContainer').css('display', 'none')		
 	$('#stopContainer').css('display', '')	
 	clock = setTimeout(display,1000);
@@ -90,32 +92,29 @@ $('#stop').on("click",function(){
 		'hours':hours,
 		'minutes':minutes
 	}
-	document.getElementById('timer').outerHTML = '<div id="timer"><button id="start">start</button></div>';
 	var board_key = localStorage.getItem('board')
 	var card_key = localStorage.getItem('card')
 	var list_apikey = localStorage.getItem('list_apikey')
 	var hours = localStorage.getItem('hours')
 	var minutes = localStorage.getItem('minutes')
-	api_report_time(apikey, board_key, card_key, list_apikey,hours,minutes)
-	console.log('sending ', apikey, board_key, card_key, list_apikey, hours,minutes)
+	var client_apikey = localStorage.getItem('client_apikey')
+	api_report_time(apikey, board_key, card_key, list_apikey, client_apikey,hours,minutes)
 	localStorage.removeItem('start');
 	localStorage.removeItem('card_key');
 	localStorage.removeItem('board_key');
 	localStorage.removeItem('list_apikey');
+	localStorage.removeItem('client_apikey');
 	clearTimeout(clock);
 	$('#startContainer').css('display', '')		
 	$('#stopContainer').css('display', 'none')	
-	$('#start').css('display','none');
+	$('#start').css('display','');
 	
 })
 
 function display(){
 	var endTime = new Date();
 	var startTime = Date.parse(localStorage.getItem('start'));
-	console.log(startTime, 'start', typeof(startTime));
-	console.log(endTime, 'end', typeof(endTime))
 	var timeDif = endTime - startTime
-	console.log(timeDif, 'dif')
 	timeDif = timeDif/1000
 	var seconds = Math.round(timeDif % 60)
 	timeDif = timeDif/60
@@ -148,7 +147,6 @@ function setBoards(boards){
 // Trying to get this function working.
 $(document.body).on('change','#board_list', function(e){
 	var board_key = document.getElementById('board_list').value
-	console.log(board_key,'board_key')
 	if(board_key != 0){
 	api_get_cards(apikey, board_key)
 	} else{
@@ -168,7 +166,6 @@ $(document.body).on('change','#card_list', function(e){
 })
 
 function setCards(cards){
-	console.log(cards,'cards')
 	$('#cards').css('display','');
 	card_list = document.getElementById("card_list")
 	cards.forEach(function(card){
@@ -178,4 +175,8 @@ function setCards(cards){
 
 function setList(card){
 	localStorage.setItem('list_apikey', card.list.public.apikey)
+}
+
+function setClient(board){
+	localStorage.setItem('client_apikey', board.client.public.apikey)
 }
