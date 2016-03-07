@@ -41,25 +41,24 @@ $("#logout").on("click",function(){
 
 $('#login').on("click",function(e) {
 	e.preventDefault();
-	username = document.getElementById("username").value
-	password = document.getElementById("password").value
-	api_url = "http://timeapi.pxp200.com/api/v1/users/authenticate";
+	trello_user = document.getElementById("trello_user").value
+	api_key = document.getElementById("api_key").value
+	api_url = "http://timeapi.pxp200.com/api/v1/users/"+trello_user;
 	params = {
-		"email": username,
-		"password": password
+		"api_key": api_key
 	}
 	$.ajax({
-				type:"POST",
-				url:api_url,
-				contentType:'application/json',
-				dataType: 'json',
-				data: JSON.stringify(params),
-				success: function(data) {
-					localStorage.setItem('login', true)
-					localStorage.setItem('user', JSON.stringify(data))
-					loggedIn()
-				}
-			});
+		type:"GET",
+		beforeSend: function(request){
+			request.setRequestHeader("Authorization", "Token token=" + api_key);
+		},
+		url:api_url,
+		success: function(data) {
+			localStorage.setItem('login', true)
+			localStorage.setItem('user', JSON.stringify(data))
+			loggedIn()
+		}
+	});
 	// return false;
 })
 
