@@ -120,7 +120,11 @@ function api_report_time(api_key, board_key, card_key, list_apikey, client_apike
 			alert("Success.")
 		},
 		failure: function(data){
-			return false;
+			alert('Failure', data)
+		},
+		error: function(data){
+			alert('error')
+			console.log(data)
 		}
 	})
 }
