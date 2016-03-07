@@ -39,27 +39,16 @@ $("#logout").on("click",function(){
 	$('#stopContainer').css('display', 'none')	
 })
 
-$('#login').on("click",function(e) {
-	e.preventDefault();
-	trello_user = document.getElementById("trello_user").value
-	api_key = document.getElementById("api_key").value
-	api_url = "http://timeapi.pxp200.com/api/v1/users/"+trello_user;
-	params = {
-		"api_key": api_key
+$('#switch').on("click", function(){
+	if( $('#normal_login').css('display') === null){
+		$('#normal_login').css('display', '')
+		$('#api_login').css('display', 'none')
 	}
-	$.ajax({
-		type:"GET",
-		beforeSend: function(request){
-			request.setRequestHeader("Authorization", "Token token=" + api_key);
-		},
-		url:api_url,
-		success: function(data) {
-			localStorage.setItem('login', true)
-			localStorage.setItem('user', JSON.stringify(data))
-			loggedIn()
-		}
-	});
-	// return false;
+	else{
+		$('#normal_login').css('display', 'none')
+		$('#api_login').css('display', '')
+	}
+	return false;
 })
 
 $('#start').on("click",function(){

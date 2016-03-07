@@ -9,13 +9,26 @@
 		<h2>PXP Timer</h2>
 		<div id="container">
 			<div id="loggedOut">
+				<div id="normal_login">
 				<form>
-					<input type="text" id="trello_user" value="Trello Username">
-					<input type="text" id="api_key" value="API Key">
+					<input type="text" id="email" value="Email Address">
+					<input type="password" id="password" value="password">
 					<a id="login">
 					<button value="login">Login</button>
 					</a>
+					<button id="switch">API/Trello Login</button>
+				</form>	
+				</div>
+				<div id="api_login" style="display:none;">	
+				<form>
+					<input type="text" id="trello_user" value="Trello Username">
+					<input type="text" id="api_key" value="API Key">
+					<a id="API_login">
+					<button value="login">Login</button>
+					</a>
+					<button id="switch">Email/Password Login</button>
 				</form>
+				</div>
 			</div>
 		</div>
 		<div id="startContainer" style="display:none;">
@@ -49,6 +62,7 @@
 	</div>
 	<script src="../../js/jquery-2.2.1.min.js"></script>
 	<script src="../../js/api.js"></script>
+	<script src="../../js/login.js"></script>
 	<script src="popup.js"></script>
 </body>
 </html>
