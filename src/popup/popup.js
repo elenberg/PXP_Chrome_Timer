@@ -71,11 +71,11 @@ $('#stop').on("click",function(){
 
 	var timeDif = endTime - -startTime;
 	timeDif = timeDif/1000
-	var seconds = Math.round(timeDif % 60)
+	var seconds = Math.floor(timeDif % 60)
 	timeDif = timeDif/60
-	var minutes = Math.round(timeDif % 60)
+	var minutes = Math.floor(timeDif % 60)
 	timeDif = timeDif/60
-	var hours = timeDif
+	var hours = Math.floor(timeDif % 24)
 	var params = {
 		'hours':hours,
 		'minutes':minutes
