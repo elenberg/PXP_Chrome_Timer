@@ -104,14 +104,14 @@ function display(){
 	var startTime = Date.parse(localStorage.getItem('start'));
 	var timeDif = endTime - startTime
 	timeDif = timeDif/1000
-	var seconds = Math.round(timeDif % 60)
+	var seconds = Math.floor(timeDif % 60)
 	timeDif = timeDif/60
-	var minutes = Math.round(timeDif % 60)
+	var minutes = Math.floor(timeDif % 60)
 
 	timeDif = timeDif/60
-	var hours = Math.round(timeDif % 24);
+	var hours = Math.floor(timeDif % 24);
 	timeDif = timeDif / 24
-	days = Math.round(timeDif)
+	days = Math.floor(timeDif)
 
 	localStorage.setItem('minutes',minutes)
 	localStorage.setItem('hours',hours)
